@@ -73,6 +73,9 @@ public class WikiSearchAPI extends SearchAPI {
 		} catch (HttpException e) {
 			e.printStackTrace();
 		}
+		finally{
+			client.getConnectionManager().shutdown();
+		}
 	}
 
 	private int extractURLs(String xmlOutput) {
