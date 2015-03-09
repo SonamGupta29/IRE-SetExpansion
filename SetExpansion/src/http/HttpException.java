@@ -1,4 +1,4 @@
-package api;
+package http;
 
 public class HttpException extends Exception {
 
