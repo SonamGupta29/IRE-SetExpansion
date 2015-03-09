@@ -14,8 +14,8 @@ public class Main {
 		
 		//Uncomment for testing wikisearch API
 		
-		/*SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.WIKI);
-		searchAPI.getTopURLs("c++ java", 100);*/
+		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.WIKI);
+		searchAPI.getTopURLs("mango orange", 10);
 		
 		//Uncomment for testing google API
 		
