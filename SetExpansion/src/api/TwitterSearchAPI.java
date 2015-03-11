@@ -14,10 +14,10 @@ public class tweetsearch {
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
-		  .setOAuthConsumerKey("ZvyHY7wciiK7WMHSvCLow8755")
-		  .setOAuthConsumerSecret("rirtzaACfiINS6nOaQajckqelWnDrqEMIQ3Hz4XTSaiFd8K5xD")
-		  .setOAuthAccessToken("3066359394-v3ExCcaKVxksplTxk3EmANIylScClNdZrjVsnq3")
-		  .setOAuthAccessTokenSecret("6dMcJElEZyQmq1JfvDm4Vw2DxI9Q4mdQhQPXUmFsOqW0P");
+		  .setOAuthConsumerKey("********************")
+		  .setOAuthConsumerSecret("************************")
+		  .setOAuthAccessToken("******************************")
+		  .setOAuthAccessTokenSecret("******************************");
 		
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		
