@@ -1,3 +1,4 @@
+package api;
 
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
@@ -5,7 +6,7 @@ import twitter4j.conf.ConfigurationBuilder;
 import java.io.IOException;
 import java.util.List;
 
-public class tweetsearch {
+public class TwitterSearchAPI {
 
 	public static void main(String[] args) throws IOException, TwitterException {
 		
