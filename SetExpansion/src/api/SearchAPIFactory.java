@@ -30,6 +30,8 @@ public class SearchAPIFactory {
 			searchAPI = new FarooSearchAPI();
 		case WEBHOSE:
 			searchAPI = new WebHoseSearchAPI();
+		case DUCKDUCKGO:
+			searchAPI = new DuckDuckGoSearchAPI();
 		default:
 			break;
 		
