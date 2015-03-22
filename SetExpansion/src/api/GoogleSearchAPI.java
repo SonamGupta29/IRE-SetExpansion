@@ -1,5 +1,20 @@
 package api;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Scanner;
+
+import org.apache.http.HttpHost;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.google.gson.Gson;
 public class GoogleSearchAPI extends SearchAPI {
 
 
@@ -12,7 +27,6 @@ public class GoogleSearchAPI extends SearchAPI {
 		total = scan.nextInt();
 		ap.getData(query,total);
 	}
-	@Override
 	public void getData(String query, int total) {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpHost proxy = new HttpHost("proxy.iiit.ac.in", 8080);
@@ -34,6 +48,11 @@ public class GoogleSearchAPI extends SearchAPI {
 				e.printStackTrace();
 			}
 		}
+	}
+	@Override
+	public void getTopURLs(String query, int n) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
