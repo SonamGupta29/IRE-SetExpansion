@@ -85,12 +85,12 @@ public class DuckDuckGoSearchAPI extends SearchAPI{
 			    System.out.println( "key = " + obj.names().getString(i) + " value = " + obj.get(obj.names().getString(i)));
 			}*/
 			/*System.out.println(obj);*/
-			for(int i = 0 ; i < obj.length() ; i++){
-				System.out.println(obj.getString("AbstractURL"));
+			/*for(int i = 0 ; i < obj.length() ; i++){*/
+			System.out.println(obj.getString("AbstractURL"));
 			    //list.add(array.getJSONObject(i).getString("interestKey"));
-			}
+			/*}*/
 			JSONObject obj111 = new JSONObject(obj);
-			System.out.println(obj);
+			/*System.out.println(obj);*/
 			/*List<String> list = new ArrayList<String>();
 			JSONArray array = obj111.getJSONArray("1");
 			for(int i = 0 ; i < array.length() ; i++){
