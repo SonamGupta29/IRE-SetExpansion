@@ -26,6 +26,10 @@ public class SearchAPIFactory {
 		case WIKI:
 			searchAPI = new WikiSearchAPI();
 			break;
+		case FAROO:
+			searchAPI = new FarooSearchAPI();
+		case WEBHOSE:
+			searchAPI = new WebHoseSearchAPI();
 		default:
 			break;
 		

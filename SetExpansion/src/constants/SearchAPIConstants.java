@@ -10,6 +10,6 @@ package constants;
 public class SearchAPIConstants {
 
 	public enum APIType {
-		GOOGLE, WIKI, BING, TWITTER;
+		GOOGLE, WIKI, BING, TWITTER, FAROO, WEBHOSE;
 	}
 }
