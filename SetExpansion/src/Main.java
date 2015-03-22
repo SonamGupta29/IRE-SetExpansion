@@ -1,8 +1,6 @@
-import org.json.JSONException;
-
-import constants.SearchAPIConstants.APIType;
 import api.SearchAPI;
 import api.SearchAPIFactory;
+import constants.SearchAPIConstants.APIType;
 
 
 
@@ -12,7 +10,7 @@ import api.SearchAPIFactory;
  */
 public class Main {
 
-	public static void main(String[] args) throws JSONException {
+	public static void main(String[] args){
 		
 		//Uncomment for testing wikisearch API
 		
@@ -25,7 +23,7 @@ public class Main {
 		/*SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.GOOGLE);
 		searchAPI.getTopURLs("c++ java", 100);*/
 		
-		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.DUCKDUCKGO);
-		searchAPI.getTopURLs("java", 10);
+		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.STACKOVERFLOW);
+		searchAPI.getTopURLs("inheritance abstraction", 10);
 	}
 }

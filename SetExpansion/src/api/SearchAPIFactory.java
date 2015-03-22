@@ -32,6 +32,8 @@ public class SearchAPIFactory {
 			searchAPI = new WebHoseSearchAPI();
 		case DUCKDUCKGO:
 			searchAPI = new DuckDuckGoSearchAPI();
+		case STACKOVERFLOW:
+			searchAPI = new StackOverflowSearchAPI();
 		default:
 			break;
 		

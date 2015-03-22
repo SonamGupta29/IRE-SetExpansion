@@ -10,7 +10,5 @@
 	<classpathentry kind="lib" path="jars/gson-2.2.2.jar"/>
 	<classpathentry kind="lib" path="jars/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="jars/jsoup-1.8.1.jar"/>
-	<classpathentry kind="lib" path="D:/softwares/java-json.jar"/>
-	<classpathentry kind="lib" path="D:/softwares/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
