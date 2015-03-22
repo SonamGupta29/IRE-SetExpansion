@@ -1,5 +1,8 @@
 package http;
 
+
+import http.HttpException;
+
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;

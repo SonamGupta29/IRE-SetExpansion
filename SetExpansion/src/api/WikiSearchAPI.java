@@ -1,7 +1,7 @@
 package api;
 
-import http.HttpException;
 import http.HttpQueries;
+import http.HttpException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
