@@ -15,7 +15,7 @@ public class SearchAPIFactory {
 		
 		switch (type) {
 		case BING:
-			//TO be implemented
+			searchAPI = new BingSearchAPI();
 			break;
 		case GOOGLE:
 			searchAPI = new GoogleSearchAPI();

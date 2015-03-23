@@ -23,7 +23,7 @@ public class Main {
 		/*SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.GOOGLE);
 		searchAPI.getTopURLs("c++ java", 100);*/
 		
-		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.STACKOVERFLOW);
+		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.BING);
 		searchAPI.getTopURLs("inheritance abstraction", 10);
 	}
 }
