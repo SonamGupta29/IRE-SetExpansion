@@ -1,7 +1,11 @@
 package api;
 
+import java.util.List;
+
+import api.BingSearchAPI.results;
+
 public abstract class SearchAPI {
 	
 	//The return type needs to be changed
-	public abstract void  getTopURLs(String query, int n);
+	public abstract List<results>  getTopURLs(String query, int n);
 }

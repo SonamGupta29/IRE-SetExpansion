@@ -8,9 +8,18 @@
 	<classpathentry kind="lib" path="jars/java-twitter-0.9-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="jars/twitter4j-core-4.0.2.jar"/>
 	<classpathentry kind="lib" path="jars/gson-2.2.2.jar"/>
-	<classpathentry kind="lib" path="jars/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="jars/jsoup-1.8.1.jar"/>
 	<classpathentry kind="lib" path="jars/java-json.jar"/>
 	<classpathentry kind="lib" path="jars/org-apache-commons-codec.jar"/>
+	<classpathentry kind="lib" path="jars/apache-httpcomponents-httpclient.jar"/>
+	<classpathentry kind="lib" path="jars/apache-httpcomponents-httpcore.jar"/>
+	<classpathentry kind="lib" path="jars/azure-bing-search-java-0.11.0.jar"/>
+	<classpathentry kind="lib" path="jars/boilerpipe-1.2.1.jar"/>
+	<classpathentry kind="lib" path="jars/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="jars/guava-r05.jar"/>
+	<classpathentry kind="lib" path="jars/mongo-java-driver-2.11.3.jar"/>
+	<classpathentry kind="lib" path="jars/morphia-0.99.jar"/>
+	<classpathentry kind="lib" path="jars/nekohtml-1.9.17.jar"/>
+	<classpathentry kind="lib" path="jars/xerces-2_6_2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

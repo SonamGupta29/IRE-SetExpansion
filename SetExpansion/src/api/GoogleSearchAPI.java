@@ -17,6 +17,8 @@ import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import api.BingSearchAPI.results;
+
 import com.google.gson.Gson;
 
 public class GoogleSearchAPI extends SearchAPI {
@@ -32,7 +34,7 @@ public class GoogleSearchAPI extends SearchAPI {
 	}
 
 	@Override
-	public void getTopURLs(String query, int n) {
+	public List<results> getTopURLs(String query, int n) {
 
 		try {
 			query = URLEncoder.encode(query, "UTF-8");
@@ -65,6 +67,8 @@ public class GoogleSearchAPI extends SearchAPI {
 				e.printStackTrace();
 			}
 		}
+		
+		return null;
 
 	}
 }

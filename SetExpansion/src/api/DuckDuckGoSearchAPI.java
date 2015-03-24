@@ -22,6 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import api.BingSearchAPI.results;
+
 import com.google.gson.Gson;
 
 public class DuckDuckGoSearchAPI extends SearchAPI{
@@ -38,7 +40,7 @@ public class DuckDuckGoSearchAPI extends SearchAPI{
 	}
 	
 	@Override
-	public void getTopURLs(String query, int n) {
+	public List<results> getTopURLs(String query, int n) {
 		try {
 			query = URLEncoder.encode(query, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -114,7 +116,11 @@ public class DuckDuckGoSearchAPI extends SearchAPI{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return null;
+
 	}
+	
 
 }
 

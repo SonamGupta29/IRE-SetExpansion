@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +25,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import api.BingSearchAPI.results;
 
 /**
  * @author mrugani
@@ -44,7 +47,7 @@ public class WikiSearchAPI extends SearchAPI {
 	}
 
 	@Override
-	public void getTopURLs(String query, int n) {
+	public List<results> getTopURLs(String query, int n) {
 
 		String urlQuery = url + "api.php?action=query&format=xml";
 		String xmlOutput;
@@ -79,6 +82,8 @@ public class WikiSearchAPI extends SearchAPI {
 		finally{
 			client.getConnectionManager().shutdown();
 		}
+		
+		return null;
 	}
 
 	private int extractURLs(String xmlOutput) {

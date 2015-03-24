@@ -2,6 +2,7 @@ package api;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
@@ -13,9 +14,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.commons.codec.binary.Base64;
 
 import com.google.gson.Gson;
-
-import api.StackOverflowSearchAPI.Result;
-import api.StackOverflowSearchAPI.items;
 
 public class BingSearchAPI extends SearchAPI {
 
@@ -29,7 +27,7 @@ public class BingSearchAPI extends SearchAPI {
 	}
 
 	@Override
-	public void getTopURLs(String query, int n) {
+	public List<results> getTopURLs(String query, int n) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -49,17 +47,15 @@ public class BingSearchAPI extends SearchAPI {
 			
 			Result result = new Gson().fromJson(responseBody,
 					Result.class);
-			int len = result.d.results.length;
-			for(int i = 0; i<len; i++){
 			
-				System.out.println(result.d.results[i].Title + " " + result.d.results[i].Url);
-			}
+			return result.d.results;
 			
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 
 	}
 
@@ -70,11 +66,12 @@ public class BingSearchAPI extends SearchAPI {
 	}
 	
 	static class d{
-		results results[];
+		List<results> results;
 	}
 
-	static class results {
-		String Title;
-		String Url;
+	public static class results {
+		public String Title;
+		public String Url;
+		public String Description;
 	}
 }

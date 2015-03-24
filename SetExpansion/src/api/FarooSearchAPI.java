@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashSet;
+import java.util.List;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
@@ -28,7 +29,7 @@ public class FarooSearchAPI extends SearchAPI {
 	}
 
 	@Override
-	public void getTopURLs(String query, int n) {
+	public List<api.BingSearchAPI.results> getTopURLs(String query, int n) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -60,6 +61,8 @@ public class FarooSearchAPI extends SearchAPI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return null;
 
 	}
 	

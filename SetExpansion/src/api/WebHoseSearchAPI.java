@@ -13,6 +13,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import api.BingSearchAPI.results;
+
 import com.google.gson.Gson;
 
 public class WebHoseSearchAPI extends SearchAPI{
@@ -27,7 +29,7 @@ public class WebHoseSearchAPI extends SearchAPI{
 		client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 	}
 	@Override
-	public void getTopURLs(String query, int n) {
+	public List<results> getTopURLs(String query, int n) {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -48,6 +50,7 @@ public class WebHoseSearchAPI extends SearchAPI{
 			e.printStackTrace();
 		}
 		
+		return null;
 	}
 	
 	static class Result{
