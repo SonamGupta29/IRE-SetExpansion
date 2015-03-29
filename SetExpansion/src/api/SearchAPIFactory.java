@@ -30,6 +30,7 @@ public class SearchAPIFactory {
 			searchAPI = new FarooSearchAPI();
 		case WEBHOSE:
 			searchAPI = new WebHoseSearchAPI();
+			break;
 		case DUCKDUCKGO:
 			searchAPI = new DuckDuckGoSearchAPI();
 		case STACKOVERFLOW:

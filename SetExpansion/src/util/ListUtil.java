@@ -8,7 +8,7 @@ public class ListUtil {
 		int count =0;
 		for(String seed : seedList){
 			for(String item : mylist){
-				if(item.toLowerCase().contains(seed) || seed.toLowerCase().contains(item)){
+				if(item.toLowerCase().contains(seed)){
 					count++;
 					break;
 				}

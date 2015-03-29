@@ -2,6 +2,7 @@ package api;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpHost;
@@ -48,7 +49,13 @@ public class BingSearchAPI extends SearchAPI {
 			Result result = new Gson().fromJson(responseBody,
 					Result.class);
 			
-			return result.d.results;
+			List<results> r = new ArrayList<>();
+			
+			for(int i=0; i<15; i++){
+				r.add(result.d.results.get(i));
+			}
+			
+			return r;
 			
 
 		} catch (IOException e) {

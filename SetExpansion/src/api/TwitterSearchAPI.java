@@ -22,15 +22,15 @@ public class TwitterSearchAPI {
 		
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		
-		if (args.length < 1) {
-			System.out.println("java twitter4j.examples.search.SearchTweets [query]");
-			System.exit(-1);
-		}
+//		if (args.length < 1) {
+//			System.out.println("java twitter4j.examples.search.SearchTweets [query]");
+//			System.exit(-1);
+//		}
 		
 		Twitter twitter = tf.getInstance();
 		
 		try {
-		Query query = new Query(args[0]);
+		Query query = new Query("java ruby perl python");
 		QueryResult result;
 		int count=0;
 		

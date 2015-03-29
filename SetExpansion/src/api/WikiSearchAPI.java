@@ -1,13 +1,16 @@
 package api;
 
-import http.HttpQueries;
 import http.HttpException;
+import http.HttpQueries;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class WikiSearchAPI extends SearchAPI {
 	String url = "https://en.wikipedia.org/w/";
 	HttpClient client;
 	HashSet<String> URLs = new HashSet<>();
+	List<results> results = new ArrayList<>();
 
 	public WikiSearchAPI() {
 
@@ -58,7 +62,7 @@ public class WikiSearchAPI extends SearchAPI {
 		String offset = "";
 		try {
 			
-			query = query.replaceAll(" ", "+");
+			query = URLEncoder.encode(query, "UTF-8");
 			urlQuery += "&generator=search&gsrsearch="
 					+ query
 					+ "&gsrprop=snippet&prop=info&inprop=url";
@@ -72,18 +76,21 @@ public class WikiSearchAPI extends SearchAPI {
 					break;
 			}
 			
-			for(String url: URLs){
+			/*for(String url: URLs){
 				System.out.println(url);
-			}
+			}*/
 
 		} catch (HttpException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally{
 			client.getConnectionManager().shutdown();
 		}
 		
-		return null;
+		return results;
 	}
 
 	private int extractURLs(String xmlOutput) {
@@ -107,7 +114,14 @@ public class WikiSearchAPI extends SearchAPI {
 				page = pageList.item(i);
 				properties = page.getAttributes();
 				propNode = properties.getNamedItem("fullurl");
-				URLs.add(propNode.getTextContent());
+				api.BingSearchAPI.results result = new results();
+				result.Url = propNode.getTextContent();
+				propNode = properties.getNamedItem("title");
+				result.Title = propNode.getTextContent();
+				result.Description = null;
+				results.add(result);
+				if(i >=20)
+					break;
 			}
 
 		} catch (SAXException | IOException | ParserConfigurationException e) {

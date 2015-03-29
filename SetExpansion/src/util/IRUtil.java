@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.jsoup.Jsoup;
 
@@ -26,7 +27,7 @@ public class IRUtil {
 	public static final String UrlRegEx = " |\\?|\\.|/|:|-|\\+|%|=|&|\\$|,|_|;|\\(|\\)|\\{|\\}|\\[|\\]|&|%";
 	public static final String Token = " |\\?|\\.|/|:|\\+|%|=|&|\n|\\$|,|_|;|\\(|\\)|\\{|\\}|\\[|\\]|&|%";
 	static HashSet<String> stopWords = new HashSet<String>();
-
+	static HashMap<String, Set<String>> urlToTokensMapping = new HashMap<>(); 
 	static {
 		BufferedReader reader=null;
 		try{
@@ -82,8 +83,9 @@ public class IRUtil {
 		}
 		text1=text1.toLowerCase();
 		text2=text2.toLowerCase();
-		Set<String> uniqText1 = new HashSet<String>(Arrays.asList(text1.split(IRUtil.Token)));
-		Set<String> uniqText2 = new HashSet<String>(Arrays.asList(text2.split(IRUtil.Token)));
+		
+		Set<String> uniqText1 = split(text1);
+		Set<String> uniqText2 = split(text2);
 
 		double intersection=ListUtil.getOverLapWithoutStopWords(uniqText1, uniqText2);
 		//return 100.0*intersection/(double)Math.log((uniqText1.size()+uniqText2.size()));
@@ -100,6 +102,7 @@ public class IRUtil {
 			LogUtil.log.fine(e.toString());
 		}*/
 		text1 = Jsoup.parse(Web.getPageHtml(url1)).text().toLowerCase();
+		//System.out.println();
 		text2 = Jsoup.parse(Web.getPageHtml(url2)).text().toLowerCase();
 		
 		if(text1==null || text2==null){
@@ -107,10 +110,22 @@ public class IRUtil {
 		}
 		
 		double intersection=0;
+		Set<String> uniqText1, uniqText2;
+		if(urlToTokensMapping.containsKey(url1)){
+			uniqText1 = urlToTokensMapping.get(url1);
+		} else {
+			//uniqText1 =  new HashSet<String>(Arrays.asList(text1.split(IRUtil.Token)));
+			uniqText1 = split(text1);
+		}
+		
+		if(urlToTokensMapping.containsKey(url2)){
+			uniqText2 = urlToTokensMapping.get(url2);
+		} else {
+			//uniqText2 = new HashSet<String>(Arrays.asList(text2.split(IRUtil.Token)));
+			uniqText2 = split(text2);
+		}
 		for(String seed : seedList){
 			if(text1.contains(seed) && text2.contains(seed)){  // ANd or OR ?
-				Set<String> uniqText1 = new HashSet<String>(Arrays.asList(text1.split(IRUtil.Token)));
-				Set<String> uniqText2 = new HashSet<String>(Arrays.asList(text2.split(IRUtil.Token)));
 				intersection=ListUtil.getOverLapWithoutStopWords(uniqText1, uniqText2);
 				return intersection;
 			}	
@@ -122,12 +137,19 @@ public class IRUtil {
 
 	public static boolean isValidWord(String smallWord) {
 		//Matcher matcher = nonWordPattern.matcher(smallWord);
-
 		//if(matcher.find() || stopWords.contains(smallWord) || smallWord.length()<2 ){
+		int i=0;
 		if(smallWord.length()<=2 || stopWords.contains(smallWord)){
 			//System.out.println("This is Invalid Concept (stopword or not-word) : " + word);
 			return false;
 		}
+		
+		for(i=0; i<smallWord.length(); i++){
+			if(!Character.isAlphabetic(smallWord.charAt(i)) && !Character.isDigit(smallWord.charAt(i))){
+				return false;
+			}
+		}
+		
 		return true;
 	}
 
@@ -154,5 +176,26 @@ public class IRUtil {
 		stemmer.add(word.toLowerCase().toCharArray(), word.length());
 		stemmer.stem();
 		return stemmer.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		String word = "apps";
+		
+		for(int i=0; i<word.length(); i++){
+			System.out.println(word.charAt(i) + " " + Character.isAlphabetic(word.charAt(i)) + " " + Character.isDigit(word.charAt(i)));
+		}
+	}
+	
+	public static HashSet<String> split(String text){
+		
+		HashSet<String> tokens = new HashSet<>();
+		
+		StringTokenizer tokenize = new StringTokenizer(text, IRUtil.Token);
+		
+		while(tokenize.hasMoreTokens()){
+			tokens.add(tokenize.nextToken());
+		}
+		return tokens;
 	}
 }

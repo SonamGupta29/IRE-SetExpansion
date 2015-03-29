@@ -3,7 +3,12 @@ package api;
 import http.HttpQueries;
 import http.HttpException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +17,8 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import util.LogUtil;
 
 import api.BingSearchAPI.results;
 
@@ -40,6 +47,7 @@ public class WebHoseSearchAPI extends SearchAPI{
 					Result.class);
 			int total = result.posts.size();
 			for(int i=0; i<total; i++){
+				WebHoseSearchAPI.getHtml(result.posts.get(i).url);
 				System.out.println(result.posts.get(i).url);
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -52,6 +60,28 @@ public class WebHoseSearchAPI extends SearchAPI{
 		
 		return null;
 	}
+	public static String getHtml(String url) {
+		System.setProperty("http.proxyHost", "proxy.iiit.ac.in");
+		System.setProperty("http.proxyPort", "8080");
+		LogUtil.log.fine("Going to web for : " + url);
+		BufferedReader in;
+		String inputLine;
+		StringBuilder sb = new StringBuilder();
+		try {
+			in = new BufferedReader(new InputStreamReader(
+					new URL(url).openStream()));
+			while ((inputLine = in.readLine()) != null) {
+				sb.append(inputLine).append("\n");
+			}
+		} catch (MalformedURLException e) {
+			LogUtil.log.fine(e.toString());
+		} catch (IOException e) {
+			LogUtil.log.fine(e.toString());
+		}
+		return sb.toString();
+	}
+
+	
 	
 	static class Result{
 		List<posts> posts;
@@ -61,6 +91,8 @@ public class WebHoseSearchAPI extends SearchAPI{
 		
 		String url;
 	}
+	
+	
 
 	
 }
