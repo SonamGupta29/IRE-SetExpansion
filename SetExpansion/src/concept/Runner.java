@@ -86,7 +86,6 @@ public class Runner {
 						d += cosineDistance(word, seedWord);
 					}
 				}
-				System.out.println(word + "=" + d);
 				distance.put(word, d);
 			}
 			
