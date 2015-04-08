@@ -16,10 +16,17 @@
 	<classpathentry kind="lib" path="jars/azure-bing-search-java-0.11.0.jar"/>
 	<classpathentry kind="lib" path="jars/boilerpipe-1.2.1.jar"/>
 	<classpathentry kind="lib" path="jars/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="jars/guava-r05.jar"/>
 	<classpathentry kind="lib" path="jars/mongo-java-driver-2.11.3.jar"/>
 	<classpathentry kind="lib" path="jars/morphia-0.99.jar"/>
 	<classpathentry kind="lib" path="jars/nekohtml-1.9.17.jar"/>
 	<classpathentry kind="lib" path="jars/xerces-2_6_2.jar"/>
+	<classpathentry kind="lib" path="jars/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="jars/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="jars/joda-time-2.3.jar"/>
+	<classpathentry kind="lib" path="jars/libthrift-0.9.1.jar"/>
+	<classpathentry kind="lib" path="jars/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="jars/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="jars/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="jars/guava-18.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -24,7 +24,7 @@ public class Main {
 		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.GOOGLE);
 		searchAPI.getTopURLs("c++ java", 100);*/
 		
-		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.TWITTER);
+		SearchAPI searchAPI = SearchAPIFactory.getSearchAPI(APIType.WIKI);
 		searchAPI.getTopURLs("java perl php ruby", 10);
 	}
 }

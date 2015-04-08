@@ -15,10 +15,10 @@ public class TwitterSearchAPI {
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
-		  .setOAuthConsumerKey("********************")
-		  .setOAuthConsumerSecret("************************")
-		  .setOAuthAccessToken("******************************")
-		  .setOAuthAccessTokenSecret("******************************");
+		  .setOAuthConsumerKey("ZvyHY7wciiK7WMHSvCLow8755")
+		  .setOAuthConsumerSecret("rirtzaACfiINS6nOaQajckqelWnDrqEMIQ3Hz4XTSaiFd8K5xD")
+		  .setOAuthAccessToken("3066359394-v3ExCcaKVxksplTxk3EmANIylScClNdZrjVsnq3")
+		  .setOAuthAccessTokenSecret("6dMcJElEZyQmq1JfvDm4Vw2DxI9Q4mdQhQPXUmFsOqW0P");
 		
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		
@@ -30,7 +30,7 @@ public class TwitterSearchAPI {
 		Twitter twitter = tf.getInstance();
 		
 		try {
-		Query query = new Query("java ruby perl python");
+		Query query = new Query("inheritance abstraction encapsulation");
 		QueryResult result;
 		int count=0;
 		
@@ -38,7 +38,7 @@ public class TwitterSearchAPI {
 		result = twitter.search(query);
 		List<Status> tweets = result.getTweets();
 		
-		String keyword = args[0];
+		String keyword ="inheritance abstraction encapsulation";
 		System.out.println(keyword);
 
 		for (Status tweet : tweets) {
@@ -47,7 +47,7 @@ public class TwitterSearchAPI {
 			if (!s.toLowerCase().contains(keyword.toLowerCase()))
 				System.out.println("@" + s + " - " + tweet.getText());
 		}
-		} while ((query = result.nextQuery()) != null && count <= 8);
+		} while ((query = result.nextQuery()) != null && count <= 10);
 		
 		System.exit(0);
 		} catch (TwitterException te) {

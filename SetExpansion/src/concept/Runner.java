@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
+
+import org.jsoup.Jsoup;
 
 import util.IRUtil;
 import util.LogUtil;
@@ -22,8 +25,6 @@ import Parser.WebPage;
 
 public class Runner {
 	private static final double VARIANCE = 0.20;
-	// private static final double OVERLAP_TOLERANCE = 0.4;
-	// private static final int STOP_THRESHOLD = 4;
 	static int fileCount = 1;
 	final int seedThrehold = 10;
 	static ArrayList<WebPage> seedPages = new ArrayList<WebPage>();
@@ -47,7 +48,7 @@ public class Runner {
 			while ((line = reader.readLine()) != null && !line.equals("")) {
 				LogUtil.log.info("======= " + line + " =======");
 				seedList.addAll(Arrays.asList(line.toLowerCase().split(" ")));
-				writer.append(expandSeed(seedList, noOfResults).toString());
+				expandSet(seedList, noOfResults);
 			}
 			reader.close();
 			writer.close();
@@ -59,6 +60,30 @@ public class Runner {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+
+	private static void expandSet(ArrayList<String> seedList, int noOfResults) {
+		
+		ArrayList<WebPage> results = SearchProvider.getURLs(seedList);
+		HashMap<String, Double> distance = new HashMap<>();
+		for(WebPage page : results){
+			
+			String text = Jsoup.parse(Web.getPageHtml(page.getUrl())).text().toLowerCase();
+			
+			HashSet<String> tokens = IRUtil.split(text);
+			
+			for(String word : tokens){
+				
+				if(!IRUtil.isValidWord(word)){
+					
+					for(String seedWord: seedList){
+						//calculate distance
+					}
+				}
+			}
+			
+			
 		}
 	}
 

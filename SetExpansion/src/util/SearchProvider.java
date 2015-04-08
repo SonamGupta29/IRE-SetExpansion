@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -281,6 +280,29 @@ public class SearchProvider {
 
 		return listPages;
 
+	}
+	
+	
+	public static ArrayList<WebPage> getURLs(ArrayList<String> seedList){
+		
+		ArrayList<WebPage> result = new ArrayList<>();
+		SearchAPI bingSearchAPI = SearchAPIFactory
+				.getSearchAPI(APIType.BING);
+		java.util.List<api.BingSearchAPI.results> resultBing= bingSearchAPI
+				.getTopURLs(constructQuery(seedList, null), 20);
+		SearchAPI wikiSearchAPI = SearchAPIFactory
+				.getSearchAPI(APIType.WIKI);
+		java.util.List<api.BingSearchAPI.results> resultWiki= wikiSearchAPI
+				.getTopURLs(constructQuery(seedList, null), 20);
+		
+		resultBing.addAll(resultWiki);
+		for (api.BingSearchAPI.results r : resultBing) {
+			
+			WebPage page = new WebPage(r.Title, r.Url, r.Description);
+			result.add(page);
+		}
+		return result;
+		
 	}
 
 	public static void getNextSeedModified(ArrayList<String> seedList,

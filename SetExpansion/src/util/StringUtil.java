@@ -1,5 +1,4 @@
 package util;
-
 public class StringUtil {
 	
 	public static double compareStrings(final String s1, final String s2)

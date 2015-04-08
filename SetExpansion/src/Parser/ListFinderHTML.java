@@ -418,9 +418,9 @@ public class ListFinderHTML {
 
 		match = pattern1.matcher(str);
 
-		while (match.find())
+		while (match.find()){
 			str = match.group(1);
-
+		}
 		match = pattern.matcher(str);
 
 		// if (match.find()) return "";
