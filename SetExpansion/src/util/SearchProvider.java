@@ -139,15 +139,15 @@ public class SearchProvider {
 	public static ArrayList<String> bingUrls(ArrayList<String> seedList,
 			String concept, int noOfResults, double overlapTolerance) {
 		ArrayList<String> listURL = new ArrayList<String>();
-		ArrayList<WebPage> results = Web.getSearchResults(seedList, concept,
-				noOfResults, overlapTolerance);
+		/*ArrayList<WebPage> results = Web.getSearchResults(seedList, concept,
+				noOfResults, overlapTolerance);*/
 
-		for (WebPage r : results) {
+		/*for (WebPage r : results) {
 			// System.out.println(r.getUrl());
 			listURL.add(r.getUrl());
 			// LogUtil.log.fine(r.getDescription());
 			// System.out.println(r.getTitle() + " :: " + r.getDescription());
-		}
+		}*/
 
 		return listURL;
 	}

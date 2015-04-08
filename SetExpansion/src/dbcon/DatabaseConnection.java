@@ -1,12 +1,13 @@
 package dbcon;
 
 import java.net.UnknownHostException;
+import java.util.List;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
-import com.mongodb.WriteResult;
 
 public class DatabaseConnection {
 
@@ -22,7 +23,7 @@ public class DatabaseConnection {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		db = mongoClient.getDB("web");
+		db = mongoClient.getDB("web2");
 		webCollection = db.getCollection("urlCollection");
 		searchCollection = db.getCollection("searchCollection");
 		word2vecCollection = db.getCollection("word2vec");
@@ -33,6 +34,21 @@ public class DatabaseConnection {
 		BasicDBObject document = new BasicDBObject();
 		document.put("word", word);
 		document.put("vectors", vectors);
-        WriteResult result = word2vecCollection.insert(document);
+        word2vecCollection.insert(document);
+	}
+	
+	public static List<Double> getVectors(String word){
+		
+		BasicDBObject query = new BasicDBObject();
+		query.put("word", word);
+		DBCursor cur = word2vecCollection.find(query);
+		if(cur.count() > 0){
+			@SuppressWarnings("unchecked")
+			List<Double> obj = (List<Double>) cur.next().get("vectors");
+			
+			return obj;
+		}
+		
+		return null;
 	}
 }

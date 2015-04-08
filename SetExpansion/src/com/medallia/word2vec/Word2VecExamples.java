@@ -71,9 +71,9 @@ public class Word2VecExamples {
 		
 		interact(model.forSearch());
 		 */
-		Word2VecModel model = Word2VecModel.fromBinFile(new File("/home/jarvis/Desktop/vectors.bin"));
+		/*Word2VecModel model = Word2VecModel.fromBinFile(new File("/home/jarvis/Desktop/vectors.bin"));
 		
-		interact(model.forSearch());	
+		interact(model.forSearch());*/	
 	}
 	
 	/** Loads a model and allows user to find similar words */

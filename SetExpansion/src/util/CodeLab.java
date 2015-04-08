@@ -186,7 +186,7 @@ public class CodeLab {
 		//System.out.println(Runner.getNextSeed(seedList, "india", 30, 1));
 		
 		
-		System.out.println(Web.getSearchResults(seedList, null, 30, 1));
+	//	System.out.println(Web.getSearchResults(seedList, null, 30, 1));
 	}
 
 	private static ArrayList<String> getURLToekns(String url) {

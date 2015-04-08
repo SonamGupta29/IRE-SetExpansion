@@ -25,7 +25,7 @@ public class Extractor {
 			int noOfResults, double overlapTolerance) {
 		// freqMap.clear();
 		// docMap.clear();
-		int weight = 1;
+		/*int weight = 1;
 		ArrayList<WebPage> listpages = Web.getSearchResults(seedList, null,
 				noOfResults, overlapTolerance);
 
@@ -96,7 +96,8 @@ public class Extractor {
 		LogUtil.log.fine("in Extract.extractConcept() Score concpet : "
 				+ concepScoreMap);
 
-		return concepScoreMap.lastEntry().getValue();
+		return concepScoreMap.lastEntry().getValue();*/
+		return "";
 	}
 
 	private static double getConceptScore(String candidateConcept,
