@@ -178,14 +178,6 @@ public class IRUtil {
 		return stemmer.toString();
 	}
 	
-	public static void main(String[] args) {
-		
-		String word = "apps";
-		
-		for(int i=0; i<word.length(); i++){
-			System.out.println(word.charAt(i) + " " + Character.isAlphabetic(word.charAt(i)) + " " + Character.isDigit(word.charAt(i)));
-		}
-	}
 	
 	public static HashSet<String> split(String text){
 		

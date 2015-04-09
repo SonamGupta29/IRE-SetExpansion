@@ -24,11 +24,12 @@ import Parser.WebPage;
 import dbcon.DatabaseConnection;
 
 public class Runner {
-	private static final double VARIANCE = 0.20;
+
 	static int fileCount = 1;
 	final int seedThrehold = 10;
 	static ArrayList<WebPage> seedPages = new ArrayList<WebPage>();
 	static HashMap<String, Double> finalSeedScores = new HashMap<String, Double>();
+	static HashMap<String, List<Double>> seedVectors = new HashMap<>();
 
 	/**
 	 * @param args
@@ -70,6 +71,7 @@ public class Runner {
 		
 		ArrayList<WebPage> results = SearchProvider.getURLs(seedList);
 		HashMap<String, Double> distance = new HashMap<>();
+		getSeedVectors(seedList);
 		double d = 0.0;
 		for(WebPage page : results){
 			
@@ -79,7 +81,7 @@ public class Runner {
 			
 			for(String word : tokens){
 				d=0;
-				if(!IRUtil.isValidWord(word) && !seedList.contains(word)){
+				if(!IRUtil.isValidWord(word) && !seedList.contains(word) && !distance.containsKey(word)){
 					
 					for(String seedWord: seedList){
 						
@@ -107,10 +109,22 @@ public class Runner {
 		}
 	}
 	
+	private static void getSeedVectors(
+			ArrayList<String> seedList) {
+		
+		int i=0, len = seedList.size();
+		for(i=0; i<len; i++){
+			
+			List<Double> seedVector = DatabaseConnection.getVectors(seedList.get(i));
+			seedVectors.put(seedList.get(i), seedVector);
+		}
+		
+	}
+
 	public static double cosineDistance(String s1, String s2){
 		
 		List<Double> v1 = DatabaseConnection.getVectors(s1);
-		List<Double> v2 = DatabaseConnection.getVectors(s2);
+		List<Double> v2 = seedVectors.get(s2);
 		if(v1==null || v2== null){
 			return 0;
 		}
