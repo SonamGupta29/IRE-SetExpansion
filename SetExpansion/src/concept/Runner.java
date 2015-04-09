@@ -126,7 +126,7 @@ public class Runner {
 		List<Double> v1 = DatabaseConnection.getVectors(s1);
 		List<Double> v2 = seedVectors.get(s2);
 		if(v1==null || v2== null){
-			return 0;
+			return 0.0;
 		}
 		return calculateDistance(v1, v2);
 	}
