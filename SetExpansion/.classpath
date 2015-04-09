@@ -28,6 +28,6 @@
 	<classpathentry kind="lib" path="jars/slf4j-api-1.5.8.jar"/>
 	<classpathentry kind="lib" path="jars/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="jars/guava-18.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sony/Desktop/IRE-SetExpansion/SetExpansion/jars/w3c-dom.jar"/>
+	<classpathentry kind="lib" path="jars/w3c-dom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
