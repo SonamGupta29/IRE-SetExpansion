@@ -290,12 +290,12 @@ public class SearchProvider {
 				.getSearchAPI(APIType.BING);
 		java.util.List<api.BingSearchAPI.results> resultBing= bingSearchAPI
 				.getTopURLs(constructQuery(seedList, null), 20);
-		SearchAPI wikiSearchAPI = SearchAPIFactory
+		/*SearchAPI wikiSearchAPI = SearchAPIFactory
 				.getSearchAPI(APIType.WIKI);
 		java.util.List<api.BingSearchAPI.results> resultWiki= wikiSearchAPI
 				.getTopURLs(constructQuery(seedList, null), 20);
 		
-		resultBing.addAll(resultWiki);
+		resultBing.addAll(resultWiki);*/
 		for (api.BingSearchAPI.results r : resultBing) {
 			
 			WebPage page = new WebPage(r.Title, r.Url, r.Description);

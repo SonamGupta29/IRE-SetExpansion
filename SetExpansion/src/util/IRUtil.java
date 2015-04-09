@@ -145,7 +145,7 @@ public class IRUtil {
 		}
 		
 		for(i=0; i<smallWord.length(); i++){
-			if(!Character.isAlphabetic(smallWord.charAt(i)) && !Character.isDigit(smallWord.charAt(i))){
+			if(!Character.isAlphabetic(smallWord.charAt(i))){
 				return false;
 			}
 		}

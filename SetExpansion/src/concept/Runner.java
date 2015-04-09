@@ -39,6 +39,8 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		int noOfResults = Integer.parseInt("10");
 
+		System.out.println(Runner.cosineDistance("stumbleupon", "woman"));
+		System.exit(1);
 		BufferedReader reader = null;
 		FileWriter writer = null;
 		String line;
@@ -68,10 +70,11 @@ public class Runner {
 	}
 
 	private static void expandSet(ArrayList<String> seedList, int noOfResults) {
-		
+		getSeedVectors(seedList);
 		ArrayList<WebPage> results = SearchProvider.getURLs(seedList);
 		HashMap<String, Double> distance = new HashMap<>();
-		getSeedVectors(seedList);
+		//getSeedVectors(seedList);
+		System.out.println("got out of getseedvectors in expandset\n");
 		double d = 0.0;
 		for(WebPage page : results){
 			
@@ -81,14 +84,15 @@ public class Runner {
 			
 			for(String word : tokens){
 				d=0;
-				if(!IRUtil.isValidWord(word) && !seedList.contains(word) && !distance.containsKey(word)){
-					
+				if(IRUtil.isValidWord(word) && !seedList.contains(word) && !distance.containsKey(word)){
+					System.out.println("inside if condition for checking valid word\n");
 					for(String seedWord: seedList){
-						
+						System.out.println("going to enter cosineDistance func\n");
 						d += cosineDistance(word, seedWord);
 					}
 				}
-				distance.put(word, d);
+				if(d>0.0)
+					distance.put(word, d);
 			}
 			
 			
@@ -114,8 +118,10 @@ public class Runner {
 		
 		int i=0, len = seedList.size();
 		for(i=0; i<len; i++){
-			
+			System.out.println("Going to getvectors from getSeedVectors\n");
+			System.out.println("String is " + seedList.get(i));
 			List<Double> seedVector = DatabaseConnection.getVectors(seedList.get(i));
+			System.out.println("got the seedvector\n");
 			seedVectors.put(seedList.get(i), seedVector);
 		}
 		
@@ -123,9 +129,11 @@ public class Runner {
 
 	public static double cosineDistance(String s1, String s2){
 		
+		System.out.println("in cosine distance function entering in getvectors func\n");
 		List<Double> v1 = DatabaseConnection.getVectors(s1);
-		List<Double> v2 = seedVectors.get(s2);
+		List<Double> v2 = DatabaseConnection.getVectors(s2);
 		if(v1==null || v2== null){
+			System.out.println("one of the vectors is null\n");
 			return 0.0;
 		}
 		return calculateDistance(v1, v2);
@@ -133,6 +141,7 @@ public class Runner {
 	
 	private static double calculateDistance(List<Double> otherVec, List<Double> vec) {
 		double d = 0;
+		System.out.println("calculating distance\n");
 		for (int a = 0; a < 300; a++)
 			d += vec.get(a) * otherVec.get(a);
 		return d;

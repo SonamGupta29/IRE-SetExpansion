@@ -51,7 +51,7 @@ public class BingSearchAPI extends SearchAPI {
 			
 			List<results> r = new ArrayList<>();
 			
-			for(int i=0; i<15; i++){
+			for(int i=0; i<10; i++){
 				r.add(result.d.results.get(i));
 			}
 			

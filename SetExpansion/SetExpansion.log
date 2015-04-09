@@ -1,4 +1,6 @@
-Apr 09, 2015 2:01:13 AM util.SearchProvider getHtml
+Apr 09, 2015 5:10:12 PM util.SearchProvider getHtml
 FINE: Going to web for : http://www.peterrabbitorganics.com/fruit-snacks/mango-banana-and-orange.php
-Apr 09, 2015 2:01:14 AM util.IRUtil <clinit>
+Apr 09, 2015 5:10:13 PM util.IRUtil <clinit>
 INFO: No of StopWords :332
+Apr 09, 2015 5:10:26 PM util.SearchProvider getHtml
+FINE: Going to web for : http://www.yummly.com/recipes/apple-banana-orange-smoothie

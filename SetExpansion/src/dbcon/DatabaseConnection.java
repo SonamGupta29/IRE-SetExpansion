@@ -7,6 +7,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 public class DatabaseConnection {
@@ -23,7 +24,7 @@ public class DatabaseConnection {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		db = mongoClient.getDB("web2");
+		db = mongoClient.getDB("web");
 		webCollection = db.getCollection("urlCollection");
 		searchCollection = db.getCollection("searchCollection");
 		word2vecCollection = db.getCollection("word2vec");
@@ -40,15 +41,19 @@ public class DatabaseConnection {
 	public static List<Double> getVectors(String word){
 		
 		BasicDBObject query = new BasicDBObject();
+		System.out.println("Word is : " + word + "\n");
 		query.put("word", word);
-		DBCursor cur = word2vecCollection.find(query);
-		if(cur.count() > 0){
+		DBObject obj = word2vecCollection.findOne(query);
+		System.out.println("inside getvectors function\n");
+		//System.out.println("query count = " + cur.count());
+		if(obj != null){
+			System.out.println("inside if block\n");
 			@SuppressWarnings("unchecked")
-			List<Double> obj = (List<Double>) cur.next().get("vectors");
+			List<Double> obj1 = (List<Double>) obj.get("vectors");
 			
-			return obj;
+			return obj1;
 		}
-		
+		System.out.println("out of if condition\n");
 		return null;
 	}
 }
