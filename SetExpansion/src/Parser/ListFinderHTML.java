@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import webdb.Web;
-
 /**
  * 
  * @author Avinash
@@ -18,6 +16,14 @@ import webdb.Web;
 public class ListFinderHTML {
 
 	private String myHTML = "";
+	public String getMyHTML() {
+		return myHTML;
+	}
+
+	public void setMyHTML(String myHTML) {
+		this.myHTML = myHTML;
+	}
+
 	private int currentpos = 0;
 	private ArrayList<String> mylist;
 	private String header;
@@ -25,21 +31,12 @@ public class ListFinderHTML {
 	private String title;
 
 	public void SetHTML(String myurl) {
-		myHTML = "";
+
 		currentpos = -1;
 		prevtable = false;
-
-		myHTML = Web.getPageHtml(myurl).toLowerCase();
-
 		currentpos = 0;
 		SetTitle();
 	}
-
-	/*
-	 * public void SetHTML(String actualhtml) throws IOException { myHTML =
-	 * actualhtml.toLowerCase(); currentpos = 0; prevtable = false; SetTitle();
-	 * }
-	 */
 	boolean prevtable;
 	int currenttablenumber;
 
@@ -211,144 +208,13 @@ public class ListFinderHTML {
 		}
 	}
 
-	private void HandleTableModified() {
-
-		mylist = new ArrayList<String>();
-		int endpos = myHTML.indexOf("</table>", currentpos);
-		int temppos = currentpos;
-		int temp1, temp2;
-		int nrows;
-		String tempstr;
-
-		SetHeader();
-
-		temp1 = myHTML.indexOf("<tr", currentpos);
-		temp1 = myHTML.indexOf(">", temp1) + 1;
-		temp2 = myHTML.indexOf("</tr>", currentpos);
-
-		if (temp1 == 0 || temp2 == -1 || temp2 < temp1)
-			return;
-
-		tempstr = myHTML.substring(temp1, temp2);
-
-		Pattern pattern = Pattern.compile("</th>|</td>");
-		Matcher match = pattern.matcher(tempstr);
-
-		nrows = 0;
-
-		while (match.find())
-			nrows++;
-
-		tableheaderlist = new ArrayList<String>();
-		tablelistlist = new ArrayList<ArrayList<String>>();
-
-		pattern = Pattern.compile("(<th>)([^<>]*)(</th>)");
-		int i;
-
-		for (i = 0; i < nrows; i++) {
-			tablelistlist.add(new ArrayList<String>());
-		}
-
-		// Match only headers
-		int initialTempPos = temppos;
-		temp1 = myHTML.indexOf("<tr", temppos);
-		if (temp1 == -1 || temp1 > endpos) {
-			return;
-		}
-		temp1 = myHTML.indexOf(">", temp1) + 1;
-
-		temp2 = myHTML.indexOf("</tr>", temp1);
-
-		if (temp1 == 0 || temp2 == -1 || temp2 < temp1)
-			return;
-
-		tempstr = myHTML.substring(temp1, temp2);
-
-		match = pattern.matcher(tempstr);
-
-		i = 0;
-
-		while (match.find()) {
-			if (i >= nrows) {
-				nrows++;
-				tablelistlist.add(new ArrayList<String>());
-			}
-
-			if (match.group(1).equals("<th>")) {
-				tableheaderlist.add(match.group(2));
-
-				i++;
-			}
-		}
-
-		temppos = temp2 + 3;
-
-		if (i == 0) {
-			temppos = initialTempPos;
-		}
-		int tm, tm1, tm2 = 0;
-		String text;
-		while (true) {
-
-			temp1 = myHTML.indexOf("<tr", temppos);
-			if (temp1 == -1 || temp1 > endpos) {
-				return;
-			}
-			temp1 = myHTML.indexOf(">", temp1) + 1;
-
-			temp2 = myHTML.indexOf("</tr>", temp1);
-
-			if (temp1 == 0 || temp2 == -1 || temp2 < temp1)
-				return;
-
-			tempstr = myHTML.substring(temp1, temp2);
-			i = 0;
-			while (true) {
-				tm = tempstr.indexOf("<td>");
-				tm1 = tempstr.indexOf("<th>");
-
-				if (tm == -1 && tm1 == -1)
-					break;
-				if (tm1 != -1 && tm1 < tm) {
-
-					tm2 = tempstr.indexOf("</th>");
-					if (tm2 < tm1)
-						break;
-					text = tempstr.substring(tm1 + 4, tm2);
-				} else {
-					tm2 = tempstr.indexOf("</td>");
-					// System.out.println(tm+4);
-					if (tm2 < tm)
-						break;
-					text = tempstr.substring(tm + 4, tm2);
-				}
-
-				tablelistlist.get(i).add(text);
-				i++;
-
-				tempstr = tempstr.substring(tm2 + 4);
-
-			}
-
-			temppos = temppos + tm2 + 4;
-
-		}
-
-	}
+	
 
 	private ArrayList<String> ProcessAndSend(ArrayList<String> mylist) {
 		String str;
-		String[] strs;
 		for (int i = 0; i < mylist.size(); i++) {
 			str = RemoveNoise(mylist.get(i));
-			// strs = str.split(",");
-			// if (strs.length>1)
-			// {
-			// mylist.remove(i);
-			// for(int j=0;j<strs.length;j++)
-			// mylist.add(RemoveNoise(strs[j]));
-			// }
-			// else
+
 			if (!mylist.contains(str))
 				mylist.set(i, str);
 		}
@@ -548,22 +414,4 @@ public class ListFinderHTML {
 		}
 	}
 
-
-	//For testing
-	public static void main(String args[]) {
-
-		ListFinderHTML finderHTML = new ListFinderHTML();
-		finderHTML
-				.SetHTML("http://en.wikipedia.org/wiki/Comparison_of_integrated_development_environments");
-		System.out.println();
-		while(true){
-			ArrayList<String> ar = finderHTML.getNextList();
-			System.out.println(ar);
-			if(ar==null){
-				break;
-			}
-		}
-		System.out.println("done");
-		
-	}
 }

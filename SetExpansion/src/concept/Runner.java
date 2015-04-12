@@ -18,8 +18,10 @@ import java.util.Set;
 import org.jsoup.Jsoup;
 
 import util.IRUtil;
+import util.ListUtil;
 import util.SearchProvider;
 import webdb.Web;
+import Parser.ListFinderHTML;
 import Parser.WebPage;
 import dbcon.DatabaseConnection;
 
@@ -39,8 +41,6 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		int noOfResults = Integer.parseInt("10");
 
-		System.out.println(Runner.cosineDistance("stumbleupon", "woman"));
-		System.exit(1);
 		BufferedReader reader = null;
 		FileWriter writer = null;
 		String line;
@@ -70,30 +70,45 @@ public class Runner {
 	}
 
 	private static void expandSet(ArrayList<String> seedList, int noOfResults) {
+		
+		long startTime = System.currentTimeMillis();
 		getSeedVectors(seedList);
 		ArrayList<WebPage> results = SearchProvider.getURLs(seedList);
 		HashMap<String, Double> distance = new HashMap<>();
-		//getSeedVectors(seedList);
-		System.out.println("got out of getseedvectors in expandset\n");
 		double d = 0.0;
+		ArrayList<String> listTokens = new ArrayList<>();
+		ListFinderHTML listFinder = new ListFinderHTML();
 		for(WebPage page : results){
 			
-			String text = Jsoup.parse(Web.getPageHtml(page.getUrl())).text().toLowerCase();
+			String html = Web.getPageHtml(page.getUrl());
+			String text = Jsoup.parse(html).text().toLowerCase();
 			
 			HashSet<String> tokens = IRUtil.split(text);
-			
+			listFinder.setMyHTML(html.toLowerCase());
+			ArrayList<String> webList = new ArrayList<String>();
+			while((webList = listFinder.getNextList())!=null){
+				if(webList.size() > 0){
+					if (ListUtil.getOverLap(webList, seedList) >= 3) {
+						listTokens.addAll(webList);
+					}
+				}
+			}
 			for(String word : tokens){
 				d=0;
 				if(IRUtil.isValidWord(word) && !seedList.contains(word) && !distance.containsKey(word)){
-					System.out.println("inside if condition for checking valid word\n");
 					for(String seedWord: seedList){
-						System.out.println("going to enter cosineDistance func\n");
 						d += cosineDistance(word, seedWord);
 					}
 				}
-				if(d>0.0)
+				if(d>0.0){
+					if(listTokens.contains(word)){
+						d = d+5;		//Add an additional weight
+					}
 					distance.put(word, d);
+				}
 			}
+			
+			listTokens.clear();
 			
 			
 		}
@@ -104,13 +119,21 @@ public class Runner {
 	        @Override
 	        public int compare(Entry<String, Double> a,
 	                Entry<String, Double> b) {
-	            return (int) (b.getValue() - a.getValue());
+	        	if(a.getValue() > b.getValue()){
+		        	   return -1;
+		           } else 
+		        	   return 1;
 	        }
 	    });
 		
-		for (int i = 0; i < 10 && i < list.size(); i++) {
+		for (int i = 0; i < 20 && i < list.size(); i++) {
 		    System.out.println(list.get(i));
 		}
+		
+		long endTime = System.currentTimeMillis();
+		
+		System.out.println("Total time taken: " + (endTime-startTime)/1000);
+
 	}
 	
 	private static void getSeedVectors(
@@ -118,10 +141,7 @@ public class Runner {
 		
 		int i=0, len = seedList.size();
 		for(i=0; i<len; i++){
-			System.out.println("Going to getvectors from getSeedVectors\n");
-			System.out.println("String is " + seedList.get(i));
 			List<Double> seedVector = DatabaseConnection.getVectors(seedList.get(i));
-			System.out.println("got the seedvector\n");
 			seedVectors.put(seedList.get(i), seedVector);
 		}
 		
@@ -129,11 +149,9 @@ public class Runner {
 
 	public static double cosineDistance(String s1, String s2){
 		
-		System.out.println("in cosine distance function entering in getvectors func\n");
 		List<Double> v1 = DatabaseConnection.getVectors(s1);
 		List<Double> v2 = DatabaseConnection.getVectors(s2);
 		if(v1==null || v2== null){
-			System.out.println("one of the vectors is null\n");
 			return 0.0;
 		}
 		return calculateDistance(v1, v2);
@@ -141,8 +159,7 @@ public class Runner {
 	
 	private static double calculateDistance(List<Double> otherVec, List<Double> vec) {
 		double d = 0;
-		System.out.println("calculating distance\n");
-		for (int a = 0; a < 300; a++)
+		for (int a = 0; a < 200; a++)
 			d += vec.get(a) * otherVec.get(a);
 		return d;
 	}

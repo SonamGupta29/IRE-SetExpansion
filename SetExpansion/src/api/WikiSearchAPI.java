@@ -120,7 +120,7 @@ public class WikiSearchAPI extends SearchAPI {
 				result.Title = propNode.getTextContent();
 				result.Description = null;
 				results.add(result);
-				if(i >=20)
+				if(i >=10)
 					break;
 			}
 
