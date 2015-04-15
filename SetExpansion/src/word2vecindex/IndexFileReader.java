@@ -10,8 +10,8 @@ import java.util.List;
 public class IndexFileReader {
 	
 	
-	private static final String primaryIndexPath = "";
-	private static final String largeIndexPath = "";
+	private static final String primaryIndexPath = "/home/jarvis/Desktop/major project_ire/primaryindex";
+	private static final String largeIndexPath = "/home/jarvis/Desktop/major project_ire/largeindex_sorted";
 
 	private static HashMap<String, Long> primaryIndexOffset = new HashMap<>();
 	
@@ -27,7 +27,7 @@ public class IndexFileReader {
 				String word = line.substring(0,offset);
 				String loc = line.substring(offset+1);
 				
-				long wordOffset = Integer.parseInt(loc);
+				long wordOffset = Long.parseLong(loc);
 				
 				primaryIndexOffset.put(word, wordOffset);
 			}
