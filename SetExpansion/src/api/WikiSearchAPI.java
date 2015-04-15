@@ -79,7 +79,7 @@ public class WikiSearchAPI extends SearchAPI {
 					break;
 			}
 			
-			for(i=1; i<=20; i++){
+			for(i=1; i<=10; i++){
 				
 				if(resultsMap.containsKey(i)){
 					results.add(resultsMap.get(i));

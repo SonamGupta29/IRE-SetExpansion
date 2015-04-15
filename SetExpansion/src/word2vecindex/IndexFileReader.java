@@ -78,7 +78,7 @@ public class IndexFileReader {
 			String vector = line.substring(index+2);
 			vector = vector.substring(0, vector.length()-1);
 			String vals[] = vector.split(",");
-			System.out.println(vals.length);
+			//System.out.println(vals.length);
 			int i=0, len = vals.length;
 			for(i=0; i<len; i++){
 				

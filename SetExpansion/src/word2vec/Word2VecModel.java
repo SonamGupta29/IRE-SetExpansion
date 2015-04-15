@@ -18,6 +18,7 @@ import util.IRUtil;
 import util.ListUtil;
 import util.SearchProvider;
 import webdb.Web;
+import word2vecindex.IndexFileReader;
 import dbcon.DatabaseConnection;
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
 import de.l3s.boilerpipe.extractors.ArticleExtractor;
@@ -107,7 +108,7 @@ public class Word2VecModel {
 
 		int i = 0, len = seedList.size();
 		for (i = 0; i < len; i++) {
-			List<Double> seedVector = DatabaseConnection.getVectors(seedList
+			List<Double> seedVector = IndexFileReader.getVectors(seedList
 					.get(i));
 			seedVectors.put(seedList.get(i), seedVector);
 		}
@@ -116,8 +117,8 @@ public class Word2VecModel {
 
 	public static double cosineDistance(String s1, String s2) {
 
-		List<Double> v1 = DatabaseConnection.getVectors(s1);
-		List<Double> v2 = DatabaseConnection.getVectors(s2);
+		List<Double> v1 = IndexFileReader.getVectors(s1);
+		List<Double> v2 = seedVectors.get(s2);
 		if (v1 == null || v2 == null) {
 			return 0.0;
 		}
@@ -127,7 +128,7 @@ public class Word2VecModel {
 	private static double calculateDistance(List<Double> otherVec,
 			List<Double> vec) {
 		double d = 0;
-		for (int a = 0; a < 200; a++)
+		for (int a = 0; a < 300; a++)
 			d += vec.get(a) * otherVec.get(a);
 		return d;
 	}

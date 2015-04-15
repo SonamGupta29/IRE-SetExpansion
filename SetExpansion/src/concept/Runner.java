@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import word2vec.Word2VecModel;
+import word2vecindex.IndexFileReader;
 
 public class Runner {
 
@@ -27,6 +28,7 @@ public class Runner {
 		BufferedReader reader = null;
 		FileWriter writer = null;
 		String line;
+		IndexFileReader.initPrimaryIndex();
 		ArrayList<String> seedList = new ArrayList<String>();
 		try {
 			reader = new BufferedReader(new FileReader(args[1]));

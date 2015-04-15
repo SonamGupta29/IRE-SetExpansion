@@ -84,15 +84,15 @@ public class SearchProvider {
 		
 		ArrayList<WebPage> result = new ArrayList<>();
 		SearchAPI bingSearchAPI = SearchAPIFactory
-				.getSearchAPI(APIType.WIKI);
+				.getSearchAPI(APIType.BING);
 		java.util.List<api.BingSearchAPI.results> resultBing= bingSearchAPI
 				.getTopURLs(constructQuery(seedList, null), 20);
-		/*SearchAPI wikiSearchAPI = SearchAPIFactory
+		SearchAPI wikiSearchAPI = SearchAPIFactory
 				.getSearchAPI(APIType.WIKI);
 		java.util.List<api.BingSearchAPI.results> resultWiki= wikiSearchAPI
-				.getTopURLs(constructQuery(seedList, null), 20);
+				.getTopURLs(constructQuery(seedList, null), 10);
 		
-		resultBing.addAll(resultWiki);*/
+		resultBing.addAll(resultWiki);
 		for (api.BingSearchAPI.results r : resultBing) {
 			
 			WebPage page = new WebPage(r.Title, r.Url, r.Description);
