@@ -8,7 +8,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import Parser.WebPage;
+import parser.WebPage;
+
 import api.SearchAPI;
 import api.SearchAPIFactory;
 import constants.SearchAPIConstants.APIType;
@@ -83,7 +84,7 @@ public class SearchProvider {
 		
 		ArrayList<WebPage> result = new ArrayList<>();
 		SearchAPI bingSearchAPI = SearchAPIFactory
-				.getSearchAPI(APIType.BING);
+				.getSearchAPI(APIType.WIKI);
 		java.util.List<api.BingSearchAPI.results> resultBing= bingSearchAPI
 				.getTopURLs(constructQuery(seedList, null), 20);
 		/*SearchAPI wikiSearchAPI = SearchAPIFactory

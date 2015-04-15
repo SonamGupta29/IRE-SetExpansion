@@ -18,6 +18,8 @@
 	<classpathentry kind="lib" path="jars/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="jars/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="jars/guava-18.0.jar"/>
-	<classpathentry kind="lib" path="jars/w3c-dom.jar"/>
+	<classpathentry kind="lib" path="jars/boilerpipe-1.2.1.jar"/>
+	<classpathentry kind="lib" path="jars/xerces-2_6_2.jar"/>
+	<classpathentry kind="lib" path="jars/nekohtml-1.9.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

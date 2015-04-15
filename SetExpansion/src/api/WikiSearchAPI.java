@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -40,8 +41,9 @@ public class WikiSearchAPI extends SearchAPI {
 	String url = "https://en.wikipedia.org/w/";
 	HttpClient client;
 	HashSet<String> URLs = new HashSet<>();
-	List<results> results = new ArrayList<>();
-
+	ArrayList<results> results = new ArrayList<>();
+	HashMap<Integer, api.BingSearchAPI.results> resultsMap = new HashMap<>();
+	
 	public WikiSearchAPI() {
 
 		HttpHost proxy = new HttpHost("proxy.iiit.ac.in", 8080);
@@ -70,15 +72,19 @@ public class WikiSearchAPI extends SearchAPI {
 			for (i = 0; i < n; i += 50) {
 
 				offset = urlQuery + urlOffset + i;
+				System.out.println(offset);
 				xmlOutput = HttpQueries.sendGetQuery(offset, client);
 				count = extractURLs(xmlOutput);
 				if (count <= 50)
 					break;
 			}
 			
-			/*for(String url: URLs){
-				System.out.println(url);
-			}*/
+			for(i=1; i<=20; i++){
+				
+				if(resultsMap.containsKey(i)){
+					results.add(resultsMap.get(i));
+				}
+			}
 
 		} catch (HttpException e) {
 			e.printStackTrace();
@@ -108,6 +114,8 @@ public class WikiSearchAPI extends SearchAPI {
 			InputSource is = new InputSource(reader);
 			is.setEncoding("UTF-8");
 			Document doc = docBuilder.parse(is);
+			String index = "";
+			int ind;
 			NodeList pageList = doc.getElementsByTagName("page");
 			count = pageList.getLength();
 			for (i = 0; i < count; i++) {
@@ -119,9 +127,10 @@ public class WikiSearchAPI extends SearchAPI {
 				propNode = properties.getNamedItem("title");
 				result.Title = propNode.getTextContent();
 				result.Description = null;
-				results.add(result);
-				if(i >=10)
-					break;
+				propNode = properties.getNamedItem("index");
+				index = propNode.getTextContent();
+				ind = Integer.parseInt(index);
+				resultsMap.put(ind, result);
 			}
 
 		} catch (SAXException | IOException | ParserConfigurationException e) {
