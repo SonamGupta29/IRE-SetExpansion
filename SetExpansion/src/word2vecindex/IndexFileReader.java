@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,17 +69,27 @@ public class IndexFileReader {
 		
 		RandomAccessFile raf;
 		String line;
+		List<Double> resultVectors = new ArrayList<>();
 		try{
 			raf = new RandomAccessFile(largeIndexPath, "r");
 			raf.seek(location);
 			line = raf.readLine();
-			System.out.println(line);
+			int index = line.indexOf(":[");
+			String vector = line.substring(index+2);
+			vector = vector.substring(0, vector.length()-1);
+			String vals[] = vector.split(",");
+			System.out.println(vals.length);
+			int i=0, len = vals.length;
+			for(i=0; i<len; i++){
+				
+				resultVectors.add(Double.parseDouble(vals[i]));
+			}
 			raf.close();
 		}
 		catch (IOException e) {
 
 			e.printStackTrace();
 		}
-		return null;
+		return resultVectors;
 	}
 }
