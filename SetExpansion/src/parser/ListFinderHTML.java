@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * 
- * @author Avinash
- */
 public class ListFinderHTML {
 
 	private String myHTML = "";
@@ -85,7 +81,7 @@ public class ListFinderHTML {
 		if (indextable <= indexol && indextable <= indexul
 				&& indextable <= indexdl && indextable <= indexselect) {
 			currentpos = myHTML.indexOf(">", indextable);
-			// currentpos = indextable + 5 +2;
+			
 			HandleTable();
 			currenttablenumber = 0;
 			prevtable = true;
@@ -97,22 +93,22 @@ public class ListFinderHTML {
 		} else if (indexol <= indextable && indexol <= indexul
 				&& indexol <= indexdl && indexol <= indexselect) {
 			currentpos = myHTML.indexOf(">", indexol);
-			// currentpos = indexol+ 2 +2;
+			
 			HandleOl();
 		} else if (indexul < indexol && indexul < indextable
 				&& indexul < indexdl && indexul < indexselect) {
 			currentpos = myHTML.indexOf(">", indexul);
-			// currentpos = indexul+ 2 +2;
+		
 			HandleUl();
 		} else if (indexdl < indexol && indexdl < indexul
 				&& indexdl < indextable && indexdl < indexselect) {
 			currentpos = myHTML.indexOf(">", indexdl);
-			// currentpos = indexdl + 2 +2;
+			
 			HandleDl();
 		} else if (indexselect < indexol && indexselect < indexul
 				&& indexselect < indextable && indexselect < indexdl) {
 			currentpos = myHTML.indexOf(">", indexselect);
-			// currentpos = indexdl + 2 +2;
+			
 			HandleSelect();
 		}
 

@@ -90,7 +90,7 @@ public class SearchProvider {
 		SearchAPI wikiSearchAPI = SearchAPIFactory
 				.getSearchAPI(APIType.WIKI);
 		java.util.List<api.BingSearchAPI.results> resultWiki= wikiSearchAPI
-				.getTopURLs(constructQuery(seedList, null), 10);
+				.getTopURLs(constructQuery(seedList, null), 5);
 		
 		resultBing.addAll(resultWiki);
 		for (api.BingSearchAPI.results r : resultBing) {

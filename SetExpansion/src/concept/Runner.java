@@ -53,6 +53,12 @@ public class Runner {
 			}
 		}
 	}
+	
+	public static ArrayList<String> getResults(ArrayList<String> seedList, int nResults){
+		
+		IndexFileReader.initPrimaryIndex();
+		return Word2VecModel.expandSet(seedList, nResults);
+	}
 
 	
 }

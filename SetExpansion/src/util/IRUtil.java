@@ -14,6 +14,7 @@ public class IRUtil {
 	public static final String Token = " |\\?|\\.|/|:|\\+|%|=|&|\n|\\$|,|_|;|\\(|\\)|\\{|\\}|\\[|\\]|&|%";
 	static HashSet<String> stopWords = new HashSet<String>();
 	static {
+		
 		BufferedReader reader=null;
 		try{
 			reader = new BufferedReader(new FileReader("stopwords"));

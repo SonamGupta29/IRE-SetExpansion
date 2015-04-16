@@ -7,8 +7,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.jsoup.Jsoup;
 
@@ -19,9 +19,6 @@ import util.ListUtil;
 import util.SearchProvider;
 import webdb.Web;
 import word2vecindex.IndexFileReader;
-import dbcon.DatabaseConnection;
-import de.l3s.boilerpipe.BoilerpipeProcessingException;
-import de.l3s.boilerpipe.extractors.ArticleExtractor;
 
 /**
  * @author mrugani
@@ -36,7 +33,7 @@ public class Word2VecModel {
 	 * @param seedList
 	 * @param noOfResults
 	 */
-	public static void expandSet(ArrayList<String> seedList, int noOfResults) {
+	public static ArrayList<String> expandSet(ArrayList<String> seedList, int noOfResults) {
 
 		long startTime = System.currentTimeMillis();
 		getSeedVectors(seedList);
@@ -44,7 +41,7 @@ public class Word2VecModel {
 		HashMap<String, Double> distance = new HashMap<>();
 		double d = 0.0;
 		ArrayList<String> listTokens = new ArrayList<>();
-		ListFinderHTML listFinder = new ListFinderHTML();
+		ListFinderHTML listFinder = new ListFinderHTML();		//Find patterns from web pages
 		for (WebPage page : results) {
 
 			String html = Web.getPageHtml(page.getUrl());
@@ -56,7 +53,7 @@ public class Word2VecModel {
 			ArrayList<String> webList = new ArrayList<String>();
 			while ((webList = listFinder.getNextList()) != null) {
 				if (webList.size() > 0) {
-					if (ListUtil.getOverLap(webList, seedList) >= 3) {
+					if (ListUtil.getOverLap(webList, seedList) >= 2) {
 						listTokens.addAll(webList);
 					}
 				}
@@ -94,14 +91,16 @@ public class Word2VecModel {
 			}
 		});
 
+		ArrayList<String> retValue = new ArrayList<>();
 		for (int i = 0; i < noOfResults && i < list.size(); i++) {
 			System.out.println(list.get(i));
+			retValue.add(list.get(i).getKey());
 		}
 
 		long endTime = System.currentTimeMillis();
 
 		System.out.println("Total time taken: " + (endTime - startTime) / 1000);
-
+		return retValue;
 	}
 
 	private static void getSeedVectors(ArrayList<String> seedList) {
@@ -128,7 +127,7 @@ public class Word2VecModel {
 	private static double calculateDistance(List<Double> otherVec,
 			List<Double> vec) {
 		double d = 0;
-		for (int a = 0; a < 300; a++)
+		for (int a = 0; a < 200; a++)
 			d += vec.get(a) * otherVec.get(a);
 		return d;
 	}

@@ -11,8 +11,8 @@ import java.util.List;
 public class IndexFileReader {
 	
 	
-	private static final String primaryIndexPath = "/home/jarvis/Desktop/major project_ire/primaryindex";
-	private static final String largeIndexPath = "/home/jarvis/Desktop/major project_ire/largeindex_sorted";
+	private static final String primaryIndexPath = "/home/mrugani/Sem_2/ire/kway_merge/primaryIndex.txt";
+	private static final String largeIndexPath = "/home/mrugani/Sem_2/ire/kway_merge/sort1";
 
 	private static HashMap<String, Long> primaryIndexOffset = new HashMap<>();
 	
@@ -78,7 +78,6 @@ public class IndexFileReader {
 			String vector = line.substring(index+2);
 			vector = vector.substring(0, vector.length()-1);
 			String vals[] = vector.split(",");
-			//System.out.println(vals.length);
 			int i=0, len = vals.length;
 			for(i=0; i<len; i++){
 				
