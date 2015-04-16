@@ -114,6 +114,7 @@ public class Word2VecModel {
 
 	}
 
+	//Calculate cosine distance for words s1 and s2
 	public static double cosineDistance(String s1, String s2) {
 
 		List<Double> v1 = IndexFileReader.getVectors(s1);

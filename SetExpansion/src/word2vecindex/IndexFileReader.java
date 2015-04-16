@@ -16,6 +16,7 @@ public class IndexFileReader {
 
 	private static HashMap<String, Long> primaryIndexOffset = new HashMap<>();
 	
+	//Load primary index into memory
 	public static void initPrimaryIndex(){
 		
 		BufferedReader bReader = null;
@@ -49,8 +50,9 @@ public class IndexFileReader {
 			}
 		}
 		
-		//bReader = new BufferedReader(new );		
 	}
+	
+	//Read vectors for word from file
 	public static List<Double> getVectors(String word){
 		
 		Long location = primaryIndexOffset.get(word);
