@@ -11,8 +11,8 @@ import java.util.List;
 public class IndexFileReader {
 	
 	
-	private static final String primaryIndexPath = "/home/mrugani/Sem_2/ire/kway_merge/primaryIndex.txt";
-	private static final String largeIndexPath = "/home/mrugani/Sem_2/ire/kway_merge/sort1";
+	private static final String primaryIndexPath = "./secondaryIndex";
+	private static final String largeIndexPath = "./primaryIndex";
 
 	private static HashMap<String, Long> primaryIndexOffset = new HashMap<>();
 	
