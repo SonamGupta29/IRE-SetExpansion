@@ -10,6 +10,7 @@ Link for the presentation: https://docs.google.com/presentation/d/15IVqeBkn7UEUg
 Link for Slides: http://www.slideshare.net/anirudhalampally/ire-set-expansion
 
 Setup Details:
+
 1. This project uses pre-trained dataset from Google news. This can be replaced by any other trained dataset using word2vec.
 
 2. Use the python scripts from the folder "scripts" to generate primary and secondary indexes.
