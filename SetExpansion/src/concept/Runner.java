@@ -2,7 +2,6 @@ package concept;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -19,26 +18,22 @@ public class Runner {
 	 * @throws MalformedURLException
 	 * args[0] --- no of results
 	 * args[1] --- Input file containing seed words
-	 * args[2] --- Output file
 	 */
 	public static void main(String[] args) throws IOException {
 		
 		int noOfResults = Integer.parseInt(args[0]);
 
 		BufferedReader reader = null;
-		FileWriter writer = null;
 		String line;
 		IndexFileReader.initPrimaryIndex();
 		ArrayList<String> seedList = new ArrayList<String>();
 		try {
 			reader = new BufferedReader(new FileReader(args[1]));
-			writer = new FileWriter(args[2]);
 			while ((line = reader.readLine()) != null && !line.equals("")) {
 				seedList.addAll(Arrays.asList(line.toLowerCase().split(" ")));
 				Word2VecModel.expandSet(seedList, noOfResults);
 			}
 			reader.close();
-			writer.close();
 		} catch(Exception e){
 			e.printStackTrace();
 		}
