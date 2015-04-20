@@ -20,6 +20,6 @@ Setup Details:
     <Number of results>, <Input file containing seedlist>
    e.g. java Runner 10 Input
 
-5. The Runner class will fetch the matching webpages containing input seed list from Google, Bing, Wikipedia, Faroo, DuckDuckGo etc using their web search APIs. For each of the token obtained from the webpage, it finds the similarity will all the seed terms using word2vec vectors. Additionally, it also finds <ol>, <li>, <table>, <select> patterns from the webpage containing seed terms. 
+5. The Runner class will fetch the matching webpages containing input seed list from Google, Bing, Wikipedia, Faroo, DuckDuckGo etc using their web search APIs. For each of the token obtained from the webpage, it finds the similarity will all the seed terms using word2vec vectors. Additionally, it also finds ol, li, table, select patterns from the webpage containing seed terms. 
 
 6. Top results are selected based on similarity.
