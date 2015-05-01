@@ -22,7 +22,7 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		
 		int noOfResults = Integer.parseInt(args[0]);
-
+		IndexFileReader.mergeIndexFiles();
 		BufferedReader reader = null;
 		String line;
 		IndexFileReader.initPrimaryIndex();
